@@ -4,6 +4,7 @@ import FileList from './components/FileList';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import AudioPlayer from './components/audioplayer';
 interface UploadedFile {
     filename: string;
     url: string;
