@@ -1,0 +1,130 @@
+# General
+####################
+.DS_Store
+Thumbs.db
+*.log
+
+# Python
+####################
+*.py[cod]
+__pycache__/
+*.so
+.Python
+*.egg-info/
+.eggs/
+*.sqlite3
+*.db
+
+# Virtual Environments
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Flask Environment Variables
+.env
+.env.local
+*.env
+*.env.local
+
+# Flask Instance and Logs
+instance/
+*.log
+
+# AWS Credentials (if any)
+.aws/
+
+# React/Node.js
+####################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build Directories
+dist/
+build/
+out/
+.temp/
+
+# Cache Files
+.cache/
+.parcel-cache/
+.tmp/
+.temp/
+.cache-loader/
+.eslintcache
+.stylelintcache
+
+# TypeScript
+####################
+*.tsbuildinfo
+
+# Testing
+####################
+coverage/
+*.coverage
+.nyc_output/
+
+# Logs
+####################
+logs/
+*.log
+
+# IDE/Editor Directories and Files
+####################
+.idea/
+.vscode/
+.history/
+*.sublime-project
+*.sublime-workspace
+
+# macOS Files
+####################
+.DS_Store
+
+# Tailwind CSS
+####################
+# If you have any generated Tailwind files, ignore them here
+# e.g., tailwind.output.css
+
+# Other
+####################
+# Lock files (optional, but usually you commit these)
+# Uncomment if you choose not to commit lock files
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# ESLint Cache
+.eslintcache
+
+# PostCSS Cache
+.postcssrc
+
+# Parcel Bundler
+.cache/
+
+# AWS SAM Build Folder
+.aws-sam/
+
+# Optional npm cache directory
+.npm
+
+# VS Code settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Ignore dotenv files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Next.js build output
+.next/
