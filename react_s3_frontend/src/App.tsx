@@ -17,9 +17,16 @@ const App: React.FC = () => {
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
   const [files, setFiles] = useState<File[]>([]);
+  const [image, setImage] = useState<File | null>(null);
 
   const handleDrop = (acceptedFiles: File[]) => {
     setFiles(acceptedFiles);
+  };
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setImage(event.target.files[0]);
+    }
   };
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -31,6 +38,9 @@ const App: React.FC = () => {
     files.forEach((file) => {
       formData.append('files', file);
     });
+    if (image) {
+      formData.append('image', image);
+    }
     formData.append('title', title);
     formData.append('summary', summary);
 
@@ -88,6 +98,21 @@ const App: React.FC = () => {
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
             placeholder='Enter podcast summary'
+            className='w-full'
+          />
+        </div>
+        <div className='mb-4'>
+          <label
+            className='block text-gray-700 text-sm font-bold mb-2'
+            htmlFor='image'
+          >
+            Image
+          </label>
+          <Input
+            id='image'
+            type='file'
+            accept='image/*'
+            onChange={handleImageChange}
             className='w-full'
           />
         </div>
