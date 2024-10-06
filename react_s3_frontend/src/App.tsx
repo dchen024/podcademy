@@ -1,16 +1,7 @@
-<<<<<<< Updated upstream
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Pod from "./pod";
 import PodID from "./podId";
-=======
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './Home';
-import Pod from './pod';
-import PodID from './podId';
-import Test from './Test';
->>>>>>> Stashed changes
 
 const App: React.FC = () => {
   return (
