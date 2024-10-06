@@ -57,6 +57,7 @@ def upload_pod_route(app):
                     file_url = s3_client.generate_presigned_url(
                         'get_object',
                         Params={'Bucket': S3_BUCKET_NAME, 'Key': s3_key},
+                        ExpiresIn=604800  # 7 days (in seconds)
                     )
                     uploaded_files_info.append(
                         {'filename': file.filename, 'url': file_url})
