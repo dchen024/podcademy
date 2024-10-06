@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Header from "./components/header";
 const Pod = () => {
   const [pods, setPods] = useState([]);
   const getPods = async (): Promise<any> => {
@@ -33,25 +34,27 @@ const Pod = () => {
     };
     fetchPods();
   }, []);
-  console.log(pods);
+  const navigate = useNavigate();
 
-  const goToPod = async (id: string) => {
-    return redirect(`http://127.0.0.1:5000/pods/${id}`);
+  const goToPod = (id: string) => {
+    return navigate(`/pod/${id}`);
   };
   return (
-    <div>
-      <h1 className="text-gray-500">Pod</h1>
-      {pods &&
-        pods.map((p, idx) => (
-          <div
-            onClick={() => {
-              goToPod(p.id);
-            }}
-            key={idx}
-          >
-            <div>{p.title}</div>
-          </div>
-        ))}
+    <div className="w-full mb-auto">
+      <Header showMyPods />
+      <div className="mx-40 mt-16">
+        {pods &&
+          pods.map((p, idx) => (
+            <button
+              key={idx}
+              className="w-full flex items-center my-4 bg-gray-300 rounded-3xl p-4 hover:bg-gray-400"
+              onClick={() => goToPod(p.id)}
+            >
+              <img src={p.image_url} className="w-[40px] mr-6" />
+              <h1 className="text-lg font-medium">{p.title}</h1>
+            </button>
+          ))}
+      </div>
     </div>
   );
 };
