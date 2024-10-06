@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./components/header";
+
+interface Pods {
+    id: string;
+    title: string;
+    image_url: string;
+}
 const Pod = () => {
-  const [pods, setPods] = useState([]);
+  const [pods, setPods] = useState<Pods[]>([]);
   const getPods = async (): Promise<any> => {
     try {
       const response = await fetch("http://127.0.0.1:5000/pods", {
@@ -39,15 +45,17 @@ const Pod = () => {
   const goToPod = (id: string) => {
     return navigate(`/pod/${id}`);
   };
+
+
   return (
     <div className="w-full mb-auto">
+      <div className="flex flex-col items-center mx-40 mt-16">
       <Header showMyPods />
-      <div className="mx-40 mt-16">
         {pods &&
           pods.map((p, idx) => (
             <button
               key={idx}
-              className="w-full flex items-center my-4 bg-gray-200 rounded-3xl p-4 hover:bg-gray-400"
+              className="flex items-center w-full p-4 my-4 bg-gray-200 rounded-3xl hover:bg-gray-400"
               onClick={() => goToPod(p.id)}
             >
               <img src={p.image_url} className="w-[40px] mr-6" />

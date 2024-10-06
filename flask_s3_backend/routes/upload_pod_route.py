@@ -4,22 +4,17 @@ import datetime
 from services.aws import s3_client, S3_BUCKET_NAME
 from services.supabase_client import supabase
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg',
-                      'gif', 'pdf', 'txt', 'docx', 'wav', 'mp3', 'webp'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'txt', 'docx', 'wav', 'mp3', 'webp'}
 MAX_CONTENT_LENGTH = 2 * 1024 * 1024 * 1024  # 2 GB limit
 
-
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def sanitize_filename(title, filename):
     extension = filename.rsplit('.', 1)[1].lower()
     sanitized_title = title.replace(' ', '_').lower()
     unique_filename = f"{sanitized_title}_{uuid.uuid4().hex}.{extension}"
     return unique_filename
-
 
 def upload_pod_route(app):
     @app.route('/upload_pod', methods=['POST'])
@@ -59,8 +54,7 @@ def upload_pod_route(app):
                         Params={'Bucket': S3_BUCKET_NAME, 'Key': s3_key},
                         ExpiresIn=604800  # 7 days (in seconds)
                     )
-                    uploaded_files_info.append(
-                        {'filename': file.filename, 'url': file_url})
+                    uploaded_files_info.append({'filename': file.filename, 'url': file_url})
                 except Exception as e:
                     print(e)
                     return jsonify({'error': 'Error uploading file'}), 500
@@ -69,8 +63,7 @@ def upload_pod_route(app):
 
         # Upload image
         sanitized_image_filename = sanitize_filename(title, image.filename)
-        image_s3_key = f"{datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')}_{
-            sanitized_image_filename}"
+        image_s3_key = f"{datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')}_{sanitized_image_filename}"
         try:
             s3_client.upload_fileobj(
                 image,
@@ -81,6 +74,7 @@ def upload_pod_route(app):
             image_url = s3_client.generate_presigned_url(
                 'get_object',
                 Params={'Bucket': S3_BUCKET_NAME, 'Key': image_s3_key},
+                ExpiresIn=604800  # 7 days (in seconds)
             )
         except Exception as e:
             print(e)
@@ -95,7 +89,6 @@ def upload_pod_route(app):
                     'media_url': uploaded_files_info[0]['url'],
                     'image_url': image_url
                 }).execute()
-
             except Exception as e:
                 print(e)
                 return jsonify({'error': 'Error creating database entry'}), 500
