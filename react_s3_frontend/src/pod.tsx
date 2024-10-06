@@ -47,7 +47,7 @@ const Pod = () => {
           pods.map((p, idx) => (
             <button
               key={idx}
-              className="w-full flex items-center my-4 bg-gray-300 rounded-3xl p-4 hover:bg-gray-400"
+              className="w-full flex items-center my-4 bg-gray-200 rounded-3xl p-4 hover:bg-gray-400"
               onClick={() => goToPod(p.id)}
             >
               <img src={p.image_url} className="w-[40px] mr-6" />
